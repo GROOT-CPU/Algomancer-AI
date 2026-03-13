@@ -1,0 +1,35 @@
+body{
+font-family: Arial;
+background:#0f172a;
+color:white;
+text-align:center;
+padding:40px;
+}
+
+textarea{
+width:80%;
+height:200px;
+padding:10px;
+font-size:16px;
+}
+
+button{
+padding:10px 20px;
+font-size:18px;
+background:#22c55e;
+border:none;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:#16a34a;
+}
+
+pre{
+background:#1e293b;
+padding:20px;
+width:80%;
+margin:auto;
+text-align:left;
+}
