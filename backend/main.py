@@ -82,3 +82,12 @@ Code:
         return {
             "optimized_code": f"Server Error: {str(e)}"
         }
+        from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],   # later restrict domain
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)

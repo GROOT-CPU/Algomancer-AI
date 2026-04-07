@@ -1,56 +1,62 @@
-<script>
+/* AUTO SWITCH LOCAL / DEPLOYED BACKEND */
+
+const API_URL =
+window.location.hostname === "localhost"
+? "http://127.0.0.1:8000"
+: "https://algomancer.onrender.com";
+
 
 async function optimizeCode(){
 
-const code = document.getElementById("codeInput").value;
-const inputLanguage = document.getElementById("inputLanguage").value;
-const outputLanguage = document.getElementById("outputLanguage").value;
+const code=document.getElementById("codeInput").value;
+const inputLanguage=document.getElementById("inputLanguage").value;
+const outputLanguage=document.getElementById("outputLanguage").value;
 
-if(code.trim() === ""){
+if(code.trim()===""){
 alert("Please enter code");
 return;
 }
 
-document.getElementById("outputCode").innerText = "Algomancer is processing your code...";
+document.getElementById("outputCode").innerText =
+"⚡ Algomancer is processing your code...";
 
 try{
 
-const response = await fetch("https://algomancer.onrender.com/optimize",{
-
+const response=await fetch(`${API_URL}/optimize`,{
 method:"POST",
-
 headers:{
 "Content-Type":"application/json"
 },
-
-body: JSON.stringify({
-code: code,
-input_language: inputLanguage,
-output_language: outputLanguage
+body:JSON.stringify({
+code:code,
+input_language:inputLanguage,
+output_language:outputLanguage
 })
-
 });
 
-const data = await response.json();
+if(!response.ok){
+throw new Error("Backend error");
+}
 
-document.getElementById("outputCode").innerText = data.optimized_code;
+const data=await response.json();
+
+document.getElementById("outputCode").innerText =
+data.optimized_code || "No response received.";
 
 }catch(error){
 
-document.getElementById("outputCode").innerText = "Error connecting to backend";
+console.error(error);
+
+document.getElementById("outputCode").innerText =
+"❌ Error connecting to backend";
 
 }
-
 }
 
 function copyCode(){
 
-const code = document.getElementById("outputCode").innerText;
-
+const code=document.getElementById("outputCode").innerText;
 navigator.clipboard.writeText(code);
-
 alert("Code copied!");
 
 }
-
-</script>
