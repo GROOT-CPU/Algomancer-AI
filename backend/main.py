@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import requests
 
 # 🔑 Replace with your OpenRouter API key
-API_KEY = "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"
+API_KEY = "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"
 
 app = FastAPI()
 
